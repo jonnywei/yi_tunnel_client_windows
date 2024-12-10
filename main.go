@@ -5,6 +5,9 @@ import (
 	"github.com/getlantern/systray"
 	"github.com/getlantern/systray/example/icon"
 	yitunnel "github.com/jonnywei/yi_tunnel"
+	"io"
+	"log"
+	"os"
 )
 
 // TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click
@@ -23,7 +26,6 @@ func onReady() {
 	go func() {
 
 		<-mGroup.ClickedCh
-
 		fmt.Println("Requesting quit")
 		yitunnel.RunClient()
 		fmt.Println("Finished quitting")
@@ -35,5 +37,13 @@ func main() {
 	// to see how GoLand suggests fixing the warning.</p><p>Alternatively, if available, click the lightbulb to view possible fixes.</p>
 	s := "gopher"
 	fmt.Println("Hello and welcome, %s!", s)
+
+	logFile, err := os.OpenFile("log.txt", os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+	if err != nil {
+		panic(err)
+	}
+	mw := io.MultiWriter(os.Stdout, logFile)
+	log.SetOutput(mw)
+	defer logFile.Close()
 	systray.Run(onReady, func() {})
 }
