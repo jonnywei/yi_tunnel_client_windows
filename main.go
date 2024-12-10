@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/getlantern/systray"
-	"github.com/getlantern/systray/example/icon"
 	yitunnel "github.com/jonnywei/yi_tunnel"
+	"github.com/jonnywei/yi_tunnel_client_windows/icon"
 	"io"
 	"log"
 	"os"
@@ -22,13 +22,13 @@ func onReady() {
 		systray.Quit()
 		fmt.Println("Finished quitting")
 	}()
-	mGroup := systray.AddMenuItem("切换节点", "切换节点")
+	mGroup := systray.AddMenuItem("启动", "启动本地节点")
 	go func() {
 
 		<-mGroup.ClickedCh
-		fmt.Println("Requesting quit")
+		fmt.Println("Requesting 启动")
 		yitunnel.RunClient()
-		fmt.Println("Finished quitting")
+		fmt.Println("Finished 启动本地节点")
 	}()
 }
 
