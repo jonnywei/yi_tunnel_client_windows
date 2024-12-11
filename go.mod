@@ -4,7 +4,8 @@ go 1.23
 
 require (
 	github.com/getlantern/systray v1.2.2
-	github.com/jonnywei/yi_tunnel v0.0.0-20241209173855-0d179c8dcdd8
+	github.com/jonnywei/yi_tunnel v0.0.0-20241211154616-87c6ff7d7ed0
+
 )
 
 require (
